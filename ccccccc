@@ -1,0 +1,43 @@
+create database trabalho3
+default character set utf8
+collate utf8_unicode_ci;
+use trabalho3;
+
+create table banco(
+cod_banco int not null auto_increment primary key,
+nome_banco varchar (45) not null
+);
+
+create table cliente(
+cpf_cliente varchar(45) not null,
+nome_cliente varchar (45) not null,
+sexo_cliente char not null,
+end_cliente varchar (45) not null
+);
+
+create table agencia(
+num_agencia int not null primary key,
+end_agencia varchar (45) not null,
+cod_banco int not null,
+foreign key fk_banco(cod_banco) references banco(cod_banco)
+on update cascade on delete restrict
+);
+
+create table conta(
+num_conta varchar(45) not null  primary key,
+saldo_conta decimal (10,2) not null,
+tipo_conta int not null,
+num_agencia int not null,
+foreign key fk_agencia(num_agencia) references agencia(num_agencia)
+on update cascade on delete restrict
+);
+
+create table historico(
+cpf_cliente varchar(45) not null,
+num_conta varchar(45) not null,
+data_inicio date not null,
+
+foreign key fk_cliente(cpf_cliente) references cliente(cpf_cliente),
+foreign key fk_conta(num_conta) references conta(num_conta)
+on update cascade on delete restrict
+);
