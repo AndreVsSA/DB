@@ -1,0 +1,36 @@
+create database trabalho2
+default character set utf8
+collate utf8_unicode_ci;
+use trabalho2;
+
+CREATE TABLE regiao(
+regiao_id int not null auto_increment primary key,
+nome_regiao varchar(45) not null,
+desc_regiao text
+ );
+ 
+  CREATE TABLE vinicola(
+vinicola_id int not null auto_increment primary key,
+nome_vinicola varchar(45) not null,
+cidade_vinicola decimal(10,2),
+fone_vinicola varchar(45) not null,
+regiao_id int not null,
+foreign key fk_regiao(regiao_id) references regiao(regiao_id)
+on update cascade on delete restrict
+);
+
+ CREATE TABLE vinho(
+vinho_id int not null auto_increment primary key,
+nome_vinho varchar(45) not null,
+tipo_vinho varchar(45) not null,
+ano_vinho int not null,
+descricao_vinho text,
+vinicola_id int not null,
+foreign key fk_vinicola(vinicola_id) references vinicola(vinicola_id)
+on update cascade on delete restrict
+);
+
+INSERT INTO regiao(nome_regia, desc_regiao)
+VALUES (null, "Serra Gaúcha", "Serra do Rio Grande do Sul"), (null, "Sul de Munas", "Sul do Estado de Minas Gerais");
+INSERT INTO vinicola(nome_vinicola, cidade_vinicola, fone_vinicola, regiao_id)
+VALUES (null, "Cave Geisse", "Pinto Bandeira, RS", "(61)99999-0000",1), (null, "Vinícola Miolo", "Vale dos Vinhedos,RS", "(61)99999-0000", 1), (null, "Casa Valduga", "Vale dos Vinhedos,RS", "(61)99999-0000",1),(null, "Pizzato", "Vale dos Vinhedos,RS", "(61)99999-0000", 1);  ; 
