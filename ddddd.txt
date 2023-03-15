@@ -1,0 +1,32 @@
+#1
+insert into produtos(nome,tipo)
+values ("Picanha Bovina","Kg."),("Vinho Pergola Tinto Suave750ml","Un."),("Pão de Alho Botelho 400Gr.","Un."),("Cerveja Heineken 330ml Larger","Un."),("Vodka Smirnoff 998ml","Un."),("Carvão Mineiro 5kg","Un."),("Linguiça de Frango","Kg.");
+Insert into parceiros(nome,data_ini,data_fin,link)
+values ("Natural Life","2020-12-01","2022-05-31","http://naturallife.com.br"),
+("Start","2021-06-01","2022-03-31","http://startquimica.com.br"),("Nivea","2020-08-01","2022-01-31","http://nivea.com.br"),
+("Friboi","2020-12-01","2022-01-31", "http://friboi.com.br"),("Cafe Catu", "2020-12-01","2022-01-31","http://cafecatu.com.br");
+
+#2
+create table empresa(
+id int not null  auto_increment primary key,
+nome varchar(45) not null,
+ras_soc varchar(45) not null,
+cnpj varchar(45) not null,
+rua varchar (100) not null,
+numero varchar (5) not null,
+bairro varchar (45) not null,
+cidade varchar (45) not null,
+estado varchar(45) not null
+);
+#b
+insert into empresa(nome,ras_soc,cnpj,rua,numero,bairro,cidade,estado)
+values ("DNS Supermercados","DNS LDTA", "24.701.167/0001-08", "Rua Major Geronimo", "34","Guanabara","Belo Horizonte","MG");
+
+alter table vagas 
+add column id_empresa int not null;
+
+ALTER TABLE vagas ADD CONSTRAINT fk_empresa FOREIGN KEY (id_empresa) REFERENCES empresa (id) on update cascade on delete restrict;
+
+select * from produtos where nome like "Vinho%";
+
+select * from produtos where nome like "%Bovin%" or "%Boi%";
