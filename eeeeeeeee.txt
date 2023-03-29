@@ -1,9 +1,11 @@
+-- Questao1 --
+#a
 select * from agencia;
-
+#b
 select endereco, numero_agencia from agencia where cod_banco not in(1, 2);
-
+#c
 select num_conta, saldo from conta where num_agencia in (190, 3153);
-
+#d
 select * from cliente where cpf=(
 	select cliente_cpf from conta where num_agencia = (
 		select numero_agencia from agencia where cod_banco=(
@@ -11,6 +13,21 @@ select * from cliente where cpf=(
 			)
 		)
 	);
-
+#e
 select * from cliente where cpf in (
-	select cliente_cpf from conta where saldo > 6000)
+	select cliente_cpf from conta where saldo > 6000);
+#f
+select *from cliente where cpf in(
+    select cliente_cpf from conta where saldo<(	
+		select avg(saldo) from conta
+	));
+#g
+select * from movimentacao where num_conta in(	
+	select num_conta from conta where num_agencia in(
+		SELECT num_agencia from agencia where endereco like "%Major Gote%" and cod_banco in(
+			select codigo from banco where nome like 'Banco do Brasil')))order by data;
+#h           
+select * from telefone_cliente where cpf_cli in(
+	select 	cliente_cpf from conta where num_agencia in(
+		select numero_agencia from agencia where cod_banco in(
+			select codigo from banco where nome like 'santander')));
