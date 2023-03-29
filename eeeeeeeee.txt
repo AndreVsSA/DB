@@ -1,0 +1,16 @@
+select * from agencia;
+
+select endereco, numero_agencia from agencia where cod_banco not in(1, 2);
+
+select num_conta, saldo from conta where num_agencia in (190, 3153);
+
+select * from cliente where cpf=(
+	select cliente_cpf from conta where num_agencia = (
+		select numero_agencia from agencia where cod_banco=(
+			select codigo from banco where nome like "Nubank"
+			)
+		)
+	);
+
+select * from cliente where cpf in (
+	select cliente_cpf from conta where saldo > 6000)
